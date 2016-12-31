@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #95a5a6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dandelion.MainController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu fx:id="menu" mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="settings" mnemonicParsing="false" text="Settings" />
+              <MenuItem fx:id="close" mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Pane prefHeight="58.0" prefWidth="250.0">
+         <children>
+            <TextField fx:id="testcase" layoutX="62.0" layoutY="7.0" prefHeight="26.0" prefWidth="170.0" text="testcase" />
+            <Label layoutX="20.0" layoutY="12.0" text="case :" />
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="camera" layoutX="18.0" layoutY="10.0" mnemonicParsing="false" onAction="#screenShot" prefHeight="154.0" prefWidth="215.0">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/camera.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</VBox>

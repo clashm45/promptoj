@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 /**
  * Selenium WebDriverの簡易wrapper.
@@ -60,12 +61,12 @@ public class SeleniumWrapper {
     /**
      * 起動済みのブラウザでスクリーンショットを撮る。
      */
-    public void takeScreenShot() {
+    public void takeScreenShot(Path outputPath) {
         System.out.println("= Screen Shot =");
         File img = ((TakesScreenshot)this.webDriverInstance).getScreenshotAs(OutputType.FILE);
         try {
-            System.out.println("Name : " + img.getName());
-            FileUtils.copyFile(img, new File(img.getName()));
+            FileUtils.copyFile(img, outputPath.toFile());
+            System.out.println("Name : " + outputPath.toFile().getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -10,6 +10,9 @@ import java.io.IOException;
 
 import static dandelion.SeleniumWrapper.WebDriverNames.*;
 
+/**
+ * スプラッシュ画面Controller
+ */
 public class SplashController {
 
     @FXML

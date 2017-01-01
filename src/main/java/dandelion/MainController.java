@@ -32,7 +32,7 @@ public class MainController {
     public static void show() {
         try {
             Parent root = FXMLLoader.load(SplashController.class.getResource("main.fxml"));
-            Main.getPrimaryStage().setTitle("Dandelion Photographer");
+            Main.getPrimaryStage().setTitle("promptoj");
             Main.getPrimaryStage().setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();

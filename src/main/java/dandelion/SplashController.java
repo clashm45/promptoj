@@ -37,7 +37,7 @@ public class SplashController {
     }
 
     @FXML
-    public void startChrome(){
+    public void startChrome() {
         SeleniumWrapper.getInstance().Open(Chrome);
         MainController.show();
     }
@@ -47,7 +47,7 @@ public class SplashController {
         MainController.show();
     }
     @FXML
-    public void startFireFox(){
+    public void startFireFox() {
         SeleniumWrapper.getInstance().Open(FireFox);
         MainController.show();
     }

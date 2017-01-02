@@ -1,6 +1,7 @@
 package dandelion;
 
-import com.typesafe.config.Config;
+import dandelion.config.AppConfig;
+import dandelion.config.ConfigUtils;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -66,6 +69,30 @@ public class MainController {
     }
 
     /**
+     * 設定画面 表示
+     */
+    @FXML
+    public void openConfig() {
+        try {
+            FXMLLoader loader = new FXMLLoader(ConfigController.class.getResource("config.fxml"));
+            Parent root = loader.load();
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(root));
+            ConfigController configController = loader.getController();
+            configController.init();//初期化
+
+            // モーダルウインドウに設定
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            // オーナーを設定
+            newStage.initOwner(Main.getPrimaryStage());
+            // 表示
+            newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 出力先パス生成
      *
      * ${dir}/${caseid}/${yyyyMMdd_hhmmss}.${extension}
@@ -73,12 +100,11 @@ public class MainController {
      * @return Path
      */
     public Path generatePath() {
-        Config output = ConfigUtils.load().getConfig("output");
-        String dir = output.getString("dirpath");
-        String caseid = output.getString("caseid");
+        AppConfig conf = ConfigUtils.getConfig();
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_hhmmss"));
-        String ext = output.getString("image.extension");
-        return Paths.get(dir, caseid, date + "." + ext);
+        return Paths.get(conf.getOutput().getDirpath(),
+                conf.getOutput().getCaseid(),
+                date + "." + conf.getOutput().getImage().getExtension());
     }
 
 }

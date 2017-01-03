@@ -1,7 +1,5 @@
 package dandelion;
 
-import dandelion.config.ConfigUtils;
-import dandelion.config.WebDriverConf;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -21,10 +19,10 @@ public class Main extends Application {
      */
     @Override
     public void init() throws Exception {
-        WebDriverConf conf = ConfigUtils.getConfig().getWebdriver();
-        System.setProperty("webdriver.chrome.driver", conf.getChrome());
-        System.setProperty("webdriver.ie.driver", conf.getIe());
-        System.setProperty("webdriver.firefox.driver", conf.getFirefox());
+//        WebDriverConf conf = ConfigUtils.getConfig().getWebdriver();
+//        System.setProperty("webdriver.chrome.driver", conf.getChrome());
+//        System.setProperty("webdriver.ie.driver", conf.getIe());
+//        System.setProperty("webdriver.firefox.driver", conf.getFirefox());
     }
 
     /**

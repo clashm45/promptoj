@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 
 import java.io.IOException;
 
@@ -14,13 +13,6 @@ import static dandelion.SeleniumWrapper.WebDriverNames.*;
  * スプラッシュ画面Controller
  */
 public class SplashController {
-
-    @FXML
-    private Button chrome;
-    @FXML
-    private Button ie;
-    @FXML
-    private Button firefox;
 
     /**
      * スプラッシュ画面 表示

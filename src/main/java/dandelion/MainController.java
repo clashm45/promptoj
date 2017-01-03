@@ -1,42 +1,33 @@
 package dandelion;
 
-import dandelion.config.AppConfig;
-import dandelion.config.ConfigUtils;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
 /**
  * メイン画面Controller
  */
-public class MainController {
-
-    @FXML
-    private Menu menu;
-    @FXML
-    private MenuItem settings;
-    @FXML
-    private MenuItem close;
+public class MainController implements Initializable {
 
     @FXML
     private TextField testcase;
 
     @FXML
-    private Button camera;
+    private ChoiceBox<String> imageExt;
 
     /**
      * スプラッシュ画面 表示
@@ -69,30 +60,6 @@ public class MainController {
     }
 
     /**
-     * 設定画面 表示
-     */
-    @FXML
-    public void openConfig() {
-        try {
-            FXMLLoader loader = new FXMLLoader(ConfigController.class.getResource("config.fxml"));
-            Parent root = loader.load();
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            ConfigController configController = loader.getController();
-            configController.init();//初期化
-
-            // モーダルウインドウに設定
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            // オーナーを設定
-            newStage.initOwner(Main.getPrimaryStage());
-            // 表示
-            newStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * 出力先パス生成
      *
      * ${dir}/${caseid}/${yyyyMMdd_hhmmss}.${extension}
@@ -100,11 +67,13 @@ public class MainController {
      * @return Path
      */
     public Path generatePath() {
-        AppConfig conf = ConfigUtils.getConfig();
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_hhmmss"));
-        return Paths.get(conf.getOutput().getDirpath(),
-                conf.getOutput().getCaseid(),
-                date + "." + conf.getOutput().getImage().getExtension());
+        return Paths.get(testcase.getText(), date + "." + imageExt.getValue());
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        imageExt.setItems(FXCollections.observableArrayList("jpeg", "gif", "png"));
+        imageExt.getSelectionModel().selectFirst();
+    }
 }

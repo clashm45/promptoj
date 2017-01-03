@@ -1,11 +1,13 @@
 package dandelion;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -65,7 +67,8 @@ public class SeleniumWrapper {
         System.out.println("= Screen Shot =");
         File img = ((TakesScreenshot)this.webDriverInstance).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(img, outputPath.toFile());
+            FileUtils.forceMkdirParent(outputPath.toFile());
+            ImageIO.write(ImageIO.read(img), FilenameUtils.getExtension(outputPath.getFileName().toString()), outputPath.toFile());
             System.out.println("Name : " + outputPath.toFile().getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();

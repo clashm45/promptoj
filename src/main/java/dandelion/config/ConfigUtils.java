@@ -25,8 +25,4 @@ public class ConfigUtils {
         return ConfigBeanFactory.create(load(), AppConfig.class);
     }
 
-    public static void saveConfig(AppConfig conf) {
-    }
-
-
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -11,21 +12,40 @@
         <menus>
           <Menu fx:id="menu" mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem fx:id="settings" mnemonicParsing="false" onAction="#openConfig" text="Settings" />
               <MenuItem fx:id="close" mnemonicParsing="false" onAction="#quit" text="Close" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <Pane prefHeight="58.0" prefWidth="250.0">
+      <Pane prefHeight="60.0">
          <children>
-            <TextField fx:id="testcase" layoutX="62.0" layoutY="7.0" prefHeight="26.0" prefWidth="170.0" text="testcase" />
-            <Label layoutX="20.0" layoutY="12.0" text="case :" />
+            <HBox>
+               <children>
+                  <Label text="case :">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="testcase" prefHeight="29.0" prefWidth="132.0" text="testcase">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <ChoiceBox fx:id="imageExt" prefWidth="50.0">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+               </children>
+            </HBox>
          </children>
       </Pane>
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="camera" layoutX="18.0" layoutY="10.0" mnemonicParsing="false" onAction="#screenShot" prefHeight="154.0" prefWidth="215.0">
+            <Button fx:id="camera" layoutX="10.0" layoutY="5.0" mnemonicParsing="false" onAction="#screenShot">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -33,6 +53,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
             </Button>
          </children>
       </Pane>

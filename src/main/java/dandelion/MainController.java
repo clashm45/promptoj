@@ -1,39 +1,33 @@
 package dandelion;
 
-import com.typesafe.config.Config;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
 /**
  * メイン画面Controller
  */
-public class MainController {
-
-    @FXML
-    private Menu menu;
-    @FXML
-    private MenuItem settings;
-    @FXML
-    private MenuItem close;
+public class MainController implements Initializable {
 
     @FXML
     private TextField testcase;
 
     @FXML
-    private Button camera;
+    private ChoiceBox<String> imageExt;
 
     /**
      * スプラッシュ画面 表示
@@ -73,12 +67,13 @@ public class MainController {
      * @return Path
      */
     public Path generatePath() {
-        Config output = ConfigUtils.load().getConfig("output");
-        String dir = output.getString("dirpath");
-        String caseid = output.getString("caseid");
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_hhmmss"));
-        String ext = output.getString("image.extension");
-        return Paths.get(dir, caseid, date + "." + ext);
+        return Paths.get(testcase.getText(), date + "." + imageExt.getValue());
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        imageExt.setItems(FXCollections.observableArrayList("jpeg", "gif", "png"));
+        imageExt.getSelectionModel().selectFirst();
+    }
 }
